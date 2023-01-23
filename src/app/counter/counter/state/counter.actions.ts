@@ -8,3 +8,8 @@ export const customIncrement = createAction(
   'customincrement',
   props<{ value: number }>()
 );
+
+export const changeSampleText = createAction(
+  'changeSampleText',
+  props<{ text: string }>()
+);
