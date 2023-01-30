@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import {
   changeSampleText,
   customIncrement,
@@ -14,15 +15,12 @@ import { ICounterState } from '../counter/state/counter.state';
 })
 export class CustomCounterInputComponent implements OnInit {
   value!: number;
-  sampleText!: string;
+  sampleText$!: Observable<string>;
 
   constructor(private store: Store<{ counterModule: ICounterState }>) {}
 
   ngOnInit(): void {
-    this.store.select(getText).subscribe((data) => {
-      console.log('Text Changed');
-      this.sampleText = data;
-    });
+    this.sampleText$ = this.store.select(getText);
   }
 
   onAdd() {
